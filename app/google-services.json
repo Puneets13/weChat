@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "62084793629",
+    "firebase_url": "https://wechat-da613-default-rtdb.firebaseio.com",
+    "project_id": "wechat-da613",
+    "storage_bucket": "wechat-da613.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62084793629:android:caf94b7c2e6d8887c80df4",
+        "android_client_info": {
+          "package_name": "com.example.wechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62084793629-c46ja02tpgbn94phl3c5qnlcm4o1sus2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wechat",
+            "certificate_hash": "f8c7a03f7952ffd14a221b8505dcdb5b6c37f992"
+          }
+        },
+        {
+          "client_id": "62084793629-oqlej05nc5sgrlmro99v6ki6tck57nng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnRKU77NH4N1bxrpoywlvRvzzjtL6ldVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62084793629-oqlej05nc5sgrlmro99v6ki6tck57nng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

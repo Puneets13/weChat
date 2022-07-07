@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/call_bg1"
+    tools:context="com.exampl.wechat.settingsActivity">
+
+    <ImageView
+        android:id="@+id/backArrowsettings"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/ic_arrow_left"
+        app:tint="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="381dp"
+        android:layout_height="365dp"
+        android:layout_below="@id/backArrowsettings"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="250dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--5:37:36-->
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:srcCompat="@drawable/user" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/frame_bg"
+            android:drawableLeft="@drawable/ic_user1"
+            android:drawablePadding="15dp"
+            android:hint="UserName"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="304dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/profile_layout_bg"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <TextView
+            android:id="@+id/user123"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/frame_bg"
+            android:drawablePadding="15dp"
+            android:padding="15dp"
+
+            android:text="USER PROFILE"
+            android:textAlignment="center"
+
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="5dp"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="10dp">
+
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_phone_call"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:hint="Contact not uploaded"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:drawableTint="@color/black" />
+
+            <TextView
+                android:id="@+id/userStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:drawableLeft="@drawable/send"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:hint="Status not uploaded"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/midColor"
+                android:textSize="18sp"
+
+                android:textStyle="italic" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

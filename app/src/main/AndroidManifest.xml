@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.exampl.weChat">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CHATingAPP"
+        tools:targetApi="31">
+        <activity
+            android:name="com.exampl.wechat.changePhnOTP"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.changePhoneNumber"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.Otp_activity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.SignInPhone"
+            android:exported="false" />
+        <activity
+            android:name=".SignInWithPhone"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.ViewImage"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.PhoneNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.OTPActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.profile_viewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity
+            android:name="com.exampl.wechat.viewProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.PhoneCallActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.settingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.GroupChatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.ChatDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatDetailedActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exampl.wechat.SignUpActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--      for adding notifications  -->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/black" />
+
+    </application>
+
+</manifest>

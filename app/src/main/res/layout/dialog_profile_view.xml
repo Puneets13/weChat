@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#232323"
+        android:orientation="vertical"
+        android:gravity="center_horizontal" >
+    <TextView
+        android:id="@+id/dialog_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_marginTop="90dp"/>
+    <TextView
+        android:id="@+id/dialog_contact"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Contact : "
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp">
+
+    </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background = "@drawable/profile_layout_bg"
+
+            >
+
+            <ImageView
+                android:id="@+id/dialog_phncall"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_phone_call"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="left"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/dialog_favourite"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_favorite_"
+                android:backgroundTint="@color/white"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/dialog_chat"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_chat"
+                android:layout_gravity="right"
+
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:src="@drawable/user" />
+
+
+</RelativeLayout>
