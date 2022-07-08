@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.exampl.wechat.Models.Status;
@@ -51,6 +53,7 @@ public class StatusFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth auth ;
     RecyclerView statusRecyclerView ;
+    ImageView delete_btn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class StatusFragment extends Fragment {
         statusRecyclerView = view.findViewById(R.id.statusRecyclerView);
 //        statusRecyclerView.showShimmerAdapter();
         addImage = view.findViewById(R.id.addImage);
+
         userStatuses = new ArrayList<>();
         statusAdapter = new StatusAdapter(getContext(),userStatuses);
         statusRecyclerView.setAdapter(statusAdapter);
@@ -91,6 +95,7 @@ public class StatusFragment extends Fragment {
                 startActivityForResult(intent, 75);
             }
         });
+
 
         database.getReference().child("stories").addValueEventListener(new ValueEventListener() {
             @Override

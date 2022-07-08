@@ -26,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -37,11 +38,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class SignInActivity extends AppCompatActivity  {
+public class SignInActivity extends AppCompatActivity {
 
     ActivitySignInBinding binding;
     ProgressDialog progressDialog;
@@ -49,7 +52,7 @@ public class SignInActivity extends AppCompatActivity  {
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase database;
     public ProgressDialog loadingBar;
-//get getting contacts
+    //get getting contacts
     List<String> contactList_google = new ArrayList<>();
 
 
@@ -62,7 +65,7 @@ public class SignInActivity extends AppCompatActivity  {
 //        to remove the actionBar on the top of app
         getSupportActionBar().hide();
 
-        loadingBar=new ProgressDialog(SignInActivity.this);
+        loadingBar = new ProgressDialog(SignInActivity.this);
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -84,7 +87,7 @@ public class SignInActivity extends AppCompatActivity  {
                 String password = binding.etPassword.getText().toString();
 //                String contact = binding.txtPhone.getText().toString();
 
-                if (mail.isEmpty() && password.isEmpty() ) {
+                if (mail.isEmpty() && password.isEmpty()) {
                     binding.etEmail.setError("ENTER YOUR EMAIL,PASSWORD");
                     Toast.makeText(SignInActivity.this, "Please Enter Your Email or Password", Toast.LENGTH_LONG).show();
                     return;
@@ -98,6 +101,19 @@ public class SignInActivity extends AppCompatActivity  {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     progressDialog.dismiss();
                                     if (task.isSuccessful()) {
+//for getting notification if user signed in through other device
+                                        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                                            @Override
+                                            public void onSuccess(String token) {
+                                                HashMap<String, Object> map = new HashMap<>();
+                                                map.put("token", token);
+                                                database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                                                        .updateChildren(map);
+
+//                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
                                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -119,7 +135,7 @@ public class SignInActivity extends AppCompatActivity  {
             public void onClick(View v) {
 //                kiran Activity
                 Intent intent = new Intent(SignInActivity.this, SignInPhone.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
 
@@ -130,7 +146,7 @@ public class SignInActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -169,31 +185,32 @@ public class SignInActivity extends AppCompatActivity  {
 
     }
 
-    EditText emailet ;
-    String email ;
+    EditText emailet;
+    String email;
+
     //    method for forget password
 //    #############################################################
 //    Dialog box with userdefiened design in the dialog itself
     private void showRecoverPasswordDialog() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Recover Password");
-        LinearLayout linearLayout=new LinearLayout(this);
+        LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 // creating an edittext inside the dialog box
-        emailet= new EditText(this);
+        emailet = new EditText(this);
         // write the email using which you registered
         emailet.setHint("Your Email");
         emailet.setMinEms(16);
         emailet.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         linearLayout.addView(emailet);
-        linearLayout.setPadding(10,10,10,10);
+        linearLayout.setPadding(10, 10, 10, 10);
         builder.setView(linearLayout);
 
         // Click on Recover and a email will be sent to your registered email id
         builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                email=emailet.getText().toString().trim();
+                email = emailet.getText().toString().trim();
 
 //            new method for showing progress bar
                 beginRecovery(email);
@@ -212,7 +229,7 @@ public class SignInActivity extends AppCompatActivity  {
 
     //    to recover the password using firebase
     private void beginRecovery(String email) {
-        loadingBar=new ProgressDialog(this);
+        loadingBar = new ProgressDialog(this);
         loadingBar.setMessage("Sending Email....\nPlease check your SPAM Folder");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
@@ -224,26 +241,23 @@ public class SignInActivity extends AppCompatActivity  {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 loadingBar.dismiss();
-                if(task.isSuccessful())
-                {
+                if (task.isSuccessful()) {
                     // if isSuccessful then done message will be shown
                     // and you can change the password
-                    Toast.makeText(SignInActivity.this,"Mail sent to "+ email,Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(SignInActivity.this,"Error Occurred",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignInActivity.this, "Mail sent to " + email, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(SignInActivity.this, "Error Occurred", Toast.LENGTH_LONG).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 loadingBar.dismiss();
-                Toast.makeText(SignInActivity.this,"Error Occured",Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInActivity.this, "Error Occured", Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
 
 
     int RC_SIGN_IN = 65;
@@ -295,23 +309,36 @@ public class SignInActivity extends AppCompatActivity  {
                     users.setContact(" ");
 
 //                    to set the google contact if not exist and if exist then
-//                    database.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            if(snapshot.hasChild("users/"+user.getUid())){
-//                                return;
-//                            }
-//                            else{
-//                                database.getReference().child("users").child(user.getUid()).setValue(users);
-//                            }
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
+                    database.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.hasChild("users/" + user.getUid())) {
+                                return;
+                            } else {
+                                database.getReference().child("users").child(user.getUid()).setValue(users);
 
-                    database.getReference().child("users").child(user.getUid()).setValue(users);
+                                FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                                    @Override
+                                    public void onSuccess(String token) {
+                                        HashMap<String, Object> map = new HashMap<>();
+                                        map.put("token", token);
+                                        database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                                                .updateChildren(map);
+
+//                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+//                    database.getReference().child("users").child(user.getUid()).setValue(users);
 
                     Toast.makeText(SignInActivity.this, user.getEmail(), Toast.LENGTH_LONG).show();
 
@@ -322,7 +349,7 @@ public class SignInActivity extends AppCompatActivity  {
 //for showing the registration contact option
 //                    showDialog_box();
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK|intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.exampl.weChat.databinding.ItemStatusBinding;
 import com.exampl.wechat.Models.Status;
 import com.exampl.wechat.Models.UserStatus;
 import com.exampl.weChat.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
@@ -83,6 +85,18 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.MyViewHold
                     .build() // Must be called before calling show method
                     .show();
         });
+
+
+//        holder.binding.deleteStatus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                database.ge
+//            }
+//        });
+//
+//
+//
+
     }
 
     @Override
@@ -92,9 +106,11 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemStatusBinding binding;
+//        ImageView delete_btn ;
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             binding = ItemStatusBinding.bind(itemView);
+//            delete_btn=binding.deleteStatus;
         }
     }
 }

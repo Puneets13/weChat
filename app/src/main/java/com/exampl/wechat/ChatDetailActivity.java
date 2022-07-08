@@ -38,6 +38,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.exampl.weChat.R;
 import com.exampl.weChat.databinding.ActivityChatDetailBinding;
+
 import com.exampl.wechat.Adapters.ChatAdapter;
 import com.exampl.wechat.Models.MessagesModel;
 import com.google.android.gms.tasks.OnCompleteListener;

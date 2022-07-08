@@ -122,7 +122,7 @@ public class PhoneCallActivity extends AppCompatActivity {
 
                     builder.setView(view);
                     ((TextView) view.findViewById(R.id.texttitle)).setText("CAN'T MAKE CALL ");
-                    ((TextView) view.findViewById(R.id.textmessage)).setText(userName+" haven't Registered");
+                    ((TextView) view.findViewById(R.id.textmessage)).setText(userName+"'s number has not being Registered yet");
                     ((Button) view.findViewById(R.id.buttonAction)).setText("OK");
                     ((ImageView) view.findViewById(R.id.ImgIcon)).setImageResource(R.drawable.ic_security);
                     final AlertDialog alertDialog = builder.create();

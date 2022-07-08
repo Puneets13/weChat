@@ -40,18 +40,18 @@ FragmentAdapter fragmentAdapter ;
 //        binding.viewpager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         binding.tablayout.setupWithViewPager(binding.viewpager);
 
-
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
-            @Override
-            public void onSuccess(String token) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("token", token);
-                database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
-                        .updateChildren(map);
-
-//                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
-            }
-        });
+//
+//        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+//            @Override
+//            public void onSuccess(String token) {
+//                HashMap<String, Object> map = new HashMap<>();
+//                map.put("token", token);
+//                database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+//                        .updateChildren(map);
+//
+////                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
     }

@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -30,6 +31,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -98,12 +102,23 @@ public class SignUpActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Users user = new Users(binding.etusername.getText().toString(), binding.etEmail.getText().toString(), binding.etPassword.getText().toString());
                                         String id = task.getResult().getUser().getUid();
+                                        user.setUserId(id);
                                         database.getReference().child("users").child(id).setValue(user);
 //user.setUserId(id);
+                                        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                                            @Override
+                                            public void onSuccess(String token) {
+                                                HashMap<String, Object> map = new HashMap<>();
+                                                map.put("token", token);
+                                                database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                                                        .updateChildren(map);
+
+//                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                         Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK|intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                         finish();
 
@@ -189,7 +204,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.d("TAG", "signUpWithCredential : Success");
                     FirebaseUser user = auth.getCurrentUser();
                     Users users = new Users();
-                    users.setUserId(user.getUid());
+                    users.setUserId(task.getResult().getUser().getUid().toString());
                     users.setUsername(task.getResult().getUser().getDisplayName().toString());
 //                    it is important to set " " contact as this bcoz google donot provide contact and empty contact will not allow to seearch in the list
 //                    so add the blank contact and ovveride it further after signing in
@@ -204,23 +219,36 @@ public class SignUpActivity extends AppCompatActivity {
 //                    to set the google contact if not exist and if exist then
 //                    if the user already exists then donot make the new user ..get the info from the databse only
 
-//                    database.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            if(snapshot.hasChild("users/"+user.getUid())){
-//                                return;
-//                            }
-//                            else{
-//                                database.getReference().child("users").child(user.getUid()).setValue(users);
-//                            }
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-
+                    database.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.hasChild("users/" + user.getUid())) {
+                                return;
+                            } else {
                                 database.getReference().child("users").child(user.getUid()).setValue(users);
+//for notification
+                                FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                                    @Override
+                                    public void onSuccess(String token) {
+                                        HashMap<String, Object> map = new HashMap<>();
+                                        map.put("token", token);
+                                        database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                                                .updateChildren(map);
+
+//                Toast.makeText(MainActivity.this, token , Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+//                                database.getReference().child("users").child(user.getUid()).setValue(users);
 
                     Toast.makeText(SignUpActivity.this, user.getEmail(), Toast.LENGTH_LONG).show();
 //                    to store the data in the database we are using this databse.getreference()......

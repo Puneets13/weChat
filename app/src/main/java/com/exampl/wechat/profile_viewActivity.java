@@ -82,7 +82,7 @@ public class profile_viewActivity extends AppCompatActivity {
 
 
                 } else if (getIntent().getStringExtra("contact").equals("")) {
-                    Toast.makeText(profile_viewActivity.this, userName+ " Contact not Uploaded", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(profile_viewActivity.this, userName+ "'s number is not being Registered yet", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(profile_viewActivity.this, "Calling.." + contact, Toast.LENGTH_SHORT).show();
                     phoneCall();
