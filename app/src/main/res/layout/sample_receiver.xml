@@ -20,6 +20,17 @@
 
         app:layout_constraintGuide_begin="16dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+           android:id="@+id/userMsgImage"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/ic_user1"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout3"
+            />
+
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
@@ -49,6 +60,7 @@
                 android:minWidth="50dp"
                 android:paddingRight="8dp"
                 android:text="TextView"
+
 
                 />
 

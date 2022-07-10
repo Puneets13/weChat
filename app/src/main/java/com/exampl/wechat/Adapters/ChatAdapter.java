@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -248,6 +249,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
 //            RecieverViewHolder viewHolder = (RecieverViewHolder) holder ;
             ((RecieverViewHolder) holder).receivermsg.setText(messagesModel.getMessage());
             ((RecieverViewHolder) holder).receiverTime.setText(messagesModel.getTimestamp());
+            String ReceiverImage = messagesModel.getReceiverImage();
+            Picasso.get().load(ReceiverImage).placeholder(R.drawable.user).into(((RecieverViewHolder) holder).ReceiverImage);
             ((RecieverViewHolder) holder).receiverImage.setVisibility(View.GONE);
             ((RecieverViewHolder) holder).receivermsg.setVisibility(View.VISIBLE);
 
@@ -295,7 +298,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     public class RecieverViewHolder extends RecyclerView.ViewHolder {
         TextView receivermsg, receiverTime;
-        ImageView receiverImage, feeling_rec;
+        ImageView receiverImage, feeling_rec,ReceiverImage;
         ConstraintLayout receiver_msg_bg;
 
         public RecieverViewHolder(@NonNull View itemView) {
@@ -305,8 +308,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
             receiverImage = itemView.findViewById(R.id.image_receiver);
             receiver_msg_bg = itemView.findViewById(R.id.receiver_msg_background);
             feeling_rec = itemView.findViewById(R.id.feeling_rec);
-
-
+            ReceiverImage = itemView.findViewById(R.id.userMsgImage);
         }
     }
 

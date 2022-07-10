@@ -29,7 +29,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <!--5:37:36-->
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImage"
             android:layout_width="342dp"
             android:layout_height="wrap_content"

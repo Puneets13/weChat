@@ -41,6 +41,7 @@ import com.exampl.weChat.databinding.ActivityChatDetailBinding;
 
 import com.exampl.wechat.Adapters.ChatAdapter;
 import com.exampl.wechat.Models.MessagesModel;
+import com.exampl.wechat.Models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -67,7 +68,7 @@ public class ChatDetailActivity extends AppCompatActivity implements PopupMenu.O
     ActivityChatDetailBinding binding;
     FirebaseDatabase database;
     FirebaseAuth auth;
-    String contact, receiverId, senderId, userName, profilepic, status, message;
+    String contact, receiverId, senderId, userName, profilepic, status, message , userNotificationName;
     String sender_contact;
     final ArrayList<MessagesModel> messagesModels = new ArrayList<>();
     FirebaseStorage storage;
@@ -103,6 +104,7 @@ public class ChatDetailActivity extends AppCompatActivity implements PopupMenu.O
         senderId = auth.getUid();
         receiverId = getIntent().getStringExtra("userid");
         userName = getIntent().getStringExtra("userName");
+
         profilepic = getIntent().getStringExtra("profilepic");
         contact = getIntent().getStringExtra("contact");
         status = getIntent().getStringExtra("status");
@@ -111,6 +113,28 @@ public class ChatDetailActivity extends AppCompatActivity implements PopupMenu.O
 
         senderRoom = senderId + receiverId;
         ReceiverRoom = receiverId + senderId;
+
+
+        database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Users users = snapshot.getValue(Users.class);
+                        try {
+                            userNotificationName = users.getUsername();
+
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
 
         binding.username.setText(userName);
@@ -290,6 +314,7 @@ public class ChatDetailActivity extends AppCompatActivity implements PopupMenu.O
                 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
                 String timeresult = sdf.format(new Date());
                 model.setTimestamp((timeresult));
+                model.setReceiverImage(profilepic);
 //                model.setImageUrl(null);
 
 //to empty the message box after send button clicked
@@ -313,7 +338,7 @@ public class ChatDetailActivity extends AppCompatActivity implements PopupMenu.O
                                         .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                sendNotification(userName, message, token);
+                                                sendNotification(userNotificationName, message, token);
                                             }
                                         });
                             }

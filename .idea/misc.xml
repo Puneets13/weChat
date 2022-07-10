@@ -7,14 +7,18 @@
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/drawable/bg_sender.xml" value="0.2155" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2215" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2215" />
-        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_chat_detail.xml" value="0.176" />
+        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_chat_detail.xml" value="0.2" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_group_chat.xml" value="0.2" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
+        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/activity_view_profile.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/custom_dialog_contact.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/fragment_call.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/fragment_status.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/item_status.xml" value="0.4" />
+        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/sample_receiver.xml" value="1.2" />
+        <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/sample_sender.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/layout/status_demo_layout.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/menu/menu.xml" value="0.25" />
         <entry key="..\:/Users/HP/WeChat/app/src/main/res/menu/search.xml" value="0.25" />

@@ -3,7 +3,7 @@ package com.exampl.wechat.Models;
 import java.util.Comparator;
 
 public class MessagesModel {
-    String uId , message,messageId,ImageUrl;
+    String uId , message,messageId,ImageUrl,ReceiverImage;
     String timestamp;
     int Feeling=-1;
 
@@ -12,12 +12,27 @@ public class MessagesModel {
         this.message = message;
         this.timestamp = timestamp;
     }
+    public MessagesModel(String uId, String message, String timestamp,String ReceiverImage) {
+        this.uId = uId;
+        this.message = message;
+        this.timestamp = timestamp;
+        this.ReceiverImage=ReceiverImage;
+    }
+
 
     public MessagesModel(String uId, String message) {
         this.uId = uId;
         this.message = message;
     }
 
+
+    public String getReceiverImage() {
+        return ReceiverImage;
+    }
+
+    public void setReceiverImage(String receiverImage) {
+        ReceiverImage = receiverImage;
+    }
 
     public int getFeeling() {
         return Feeling;
